@@ -94,11 +94,7 @@ def get_ip_mask_touple_list(raw):
 
 
 def convert_ip_range_to_openvpn_push_entry(ip_range):
-    push_entry = []
-    for ip, mask in ip_range:
-        push_entry.append(f'push "route {ip} {mask}"')
-
-    return push_entry
+    return [ f'push "route {ip} {mask}"' for ip, mask in ip_range ]
 
 
 def main():
@@ -107,6 +103,7 @@ def main():
     openvpn_push_entry = convert_ip_range_to_openvpn_push_entry(ip_range)
     routes = '\n'.join(openvpn_push_entry)
     print(routes)
+
 
 if __name__ == '__main__':
     main()
