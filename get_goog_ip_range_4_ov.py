@@ -99,7 +99,6 @@ def convert_ip_range_to_openvpn_push_entry(ip_range):
 
 def main():
     ip_range = get_ip_mask_touple_list(GOOG_IP_RANGE)
-    print(ip_range)
     openvpn_push_entry = convert_ip_range_to_openvpn_push_entry(ip_range)
     routes = '\n'.join(openvpn_push_entry)
     print(routes)
