@@ -7,7 +7,7 @@ bw_file='wiki_bw.csv'
 awk -F',' '{print $3}' ${bw_file} > ${bw_file}.domain
 
 dig -f ${bw_file}.domain | tee  ${bw_file}.domain.dig
-ggrep -P -v '^(;|$)' ${bw_file}.domain.dig | ggrep -P '[\d+\.]{3}\.\d+$' | awk '{print substr($1,0,length($1) - 1) " " $5}' > ${bw_file}.domain.dig.pair
+grep -P -v '^(;|$)' ${bw_file}.domain.dig | grep -P '[\d+\.]{3}\.\d+$' | awk '{print substr($1,0,length($1) - 1) " " $5}' > ${bw_file}.domain.dig.pair
 awk -F' ' '{print $2}' ${bw_file}.domain.dig.pair > ${bw_file}.domain.dig.pair.ip
 
 final_out='push_entrys'

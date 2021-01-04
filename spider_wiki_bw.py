@@ -1,5 +1,7 @@
+# scrapy wikipedia blocked websites
+#
 import scrapy
-import json
+
 
 class WikiBWSpider(scrapy.Spider):
     name = 'wiki-spider'
