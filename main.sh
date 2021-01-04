@@ -10,7 +10,7 @@ dig -f ${bw_file}.domain | tee  ${bw_file}.domain.dig
 grep -P -v '^(;|$)' ${bw_file}.domain.dig | grep -P '[\d+\.]{3}\.\d+$' | awk '{print substr($1,0,length($1) - 1) " " $5}' > ${bw_file}.domain.dig.pair
 awk -F' ' '{print $2}' ${bw_file}.domain.dig.pair > ${bw_file}.domain.dig.pair.ip
 
-final_out='push_entrys'
+final_out='{out_dir}/push_entrys'
 echo '# google ip ranges' > $final_out
 python3 convert_cidr_to_push_entry.py goog_cidr.yaml >> $final_out
 
