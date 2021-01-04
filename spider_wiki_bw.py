@@ -1,7 +1,7 @@
 import scrapy
-import csv
+import json
 
-class WikiSpider(scrapy.Spider):
+class WikiBWSpider(scrapy.Spider):
     name = 'wiki-spider'
 
     def start_requests(self):
@@ -13,7 +13,7 @@ class WikiSpider(scrapy.Spider):
 
     def parse(self, response):
         page = response.url.split("/")[-1]
-        filename = f'wiki-{page}.html'
+        filename = f'{page}.html'
         with open(filename, 'wb') as f:
             f.write(response.body)
         self.log(f'Saved file {filename}')
@@ -26,9 +26,5 @@ class WikiSpider(scrapy.Spider):
             lines += f'{site},{domain},{url}\n'
 
         self.log(lines)
-        with open('bw.csv', 'w') as bw_file:
+        with open('wiki_bw.csv', 'w') as bw_file:
             bw_file.write(lines)
-
-# awk -F',' '{print $3}' > bw.csv.domain
-# dig -f bw.csv.domain > bw.csv.domain.dig
-# grep -P -v '^(;|$)' bw.csv.domain.dig | grep -P '[\d+\.]{3}\.\d+$' | awk '{print $1 " " $5}'
