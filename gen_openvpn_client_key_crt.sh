@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 get_serial() {
+    if [ ! -f serail ]; then
+        echo -n 101
+        return
+    fi
     curr=$(cat serial)
     new=$(( curr + 1 ))
     echo -n $new 
