@@ -28,5 +28,5 @@ class WikiBWSpider(scrapy.Spider):
             lines += f'{site},{domain},{url}\n'
 
         self.log(lines)
-        with open('wiki_bw.csv', 'w') as bw_file:
+        with open('bw_all.csv', 'w') as bw_file:
             bw_file.write(lines)
