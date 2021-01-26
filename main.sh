@@ -3,6 +3,8 @@
 scrapy runspider spider_iprange_goog.py
 scrapy runspider spider_wiki_bw.py
 
+python3 convert_cidr_to_push_entry.py goog_cidr.yaml >> push_entrys_goog
+
 bw_all='bw_all.csv'
 awk -F',' '{print $3}' ${bw_all} > ${bw_all}.domain
 
@@ -13,7 +15,7 @@ for bw_file in ${bw_all} bw_special; do
 
     final_out="push_entrys_${bw_file}"
     echo '# google ip ranges' > $final_out
-    python3 convert_cidr_to_push_entry.py goog_cidr.yaml >> $final_out
+    cat push_entrys_goog >> $final_out
 
     echo >> $final_out
     echo '# blocked websites' >> $final_out
