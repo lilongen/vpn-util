@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 get_serial() {
-    if [ ! -f serail ]; then
+    if [ ! -f serial ]; then
         echo -n 101
         return
     fi
