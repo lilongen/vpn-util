@@ -14,7 +14,7 @@ for bw_file in ${bw_all} ${bw_special}; do
     grep -P -v '^(;|$)' ${bw_file}.domain.dig | grep -P '[\d+\.]{3}\.\d+$' | awk '{print substr($1,0,length($1) - 1) " " $5}' > ${bw_file}.domain.dig.pair
     awk -F' ' '{print $2}' ${bw_file}.domain.dig.pair > ${bw_file}.domain.dig.pair.ip
 
-    final_out="push_entrys_${bw_file}"
+    final_out="push_entrys_${bw_file:0:-4}" # remove '.csv'
     echo '# google ip ranges' > $final_out
     cat push_entrys_goog >> $final_out
 
