@@ -6,9 +6,10 @@ scrapy runspider spider_wiki_bw.py
 python3 convert_cidr_to_push_entry.py goog_cidr.yaml >> push_entrys_goog
 
 bw_all='bw_all.csv'
+bw_special='bw_special.csv'
 awk -F',' '{print $3}' ${bw_all} > ${bw_all}.domain
 
-for bw_file in ${bw_all} bw_special; do
+for bw_file in ${bw_all} ${bw_special}; do
     dig -f ${bw_file}.domain | tee  ${bw_file}.domain.dig
     grep -P -v '^(;|$)' ${bw_file}.domain.dig | grep -P '[\d+\.]{3}\.\d+$' | awk '{print substr($1,0,length($1) - 1) " " $5}' > ${bw_file}.domain.dig.pair
     awk -F' ' '{print $2}' ${bw_file}.domain.dig.pair > ${bw_file}.domain.dig.pair.ip
